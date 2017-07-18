@@ -27,9 +27,10 @@ $initData	= [
 	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 ];
 
+$initData	= '000000000000000000000000000000000000000000000000000000000000000010000000000000000000000000000000002020000000000111200000000000002000000000000010000000000000000000000000000000000000000000000000000000000000000000000000000000000';
 $gb	= new Gobang($initData);
 
-$gb->get_chess();
+$gb->echo_chess();
 
 $step	= 10;
 $turn	= 1;
@@ -39,8 +40,15 @@ while($step > 0){
 	$data	= trim(fgets(STDIN));
 	$data	= explode(',',$data);
 
-	$gb->one_step($turn,$data[0],$data[1]);
-	$gb->get_chess();
+	$ok	= $gb->one_step($turn,$data[0],$data[1]);
+
+	if(100 != $ok){
+		echo $gb->get_err($ok)."\n";
+		continue;
+	}
+
+	$gb->echo_chess();
+	echo $gb->to_string();
 
 	$win	= $gb->is_win($data[0],$data[1]);
 	if(0 != $win){

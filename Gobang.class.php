@@ -8,6 +8,13 @@
 namespace chenishr;
 
 class Gobang{
+	const err	= [
+		100	=> '成功',
+		101	=> '坐标错误或越界',
+		102	=> '坐标已赋值',
+		103	=> '初始化数据出错',
+		104	=> '类别错误',
+	];
 	/*
 	 * 五子棋棋盘
 	 */
@@ -27,7 +34,7 @@ class Gobang{
 		if(is_array($init)){
 			// 检查棋盘的尺寸是否正确
 			if($this->row != count($init) || $this->col != count($init[0])){
-				return false;
+				return 103;
 			}
 			$this->chessBoard	= $init;
 		}else{
@@ -48,26 +55,30 @@ class Gobang{
 	public function one_step($type,$x,$y){
 		// 类型是否正确
 		if(1 != $type && 2 != $type){
-			return false;
+			return 104;
 		}
 
 		if(!$this->is_valid_position($x,$y)){
-			return false;
+			return 101;
 		}
 
 		// 坐标位置是否为空
 		if(0 != $this->chessBoard[$x][$y]){
-			return false;
+			return 102;
 		}
 
 		// 落子
 		$this->chessBoard[$x][$y]	= $type;
 
-		return true;
+		return 100;
 	}
 
-	// 坐标是有
+	// 坐标是有效
 	protected function is_valid_position($x,$y){
+		if(!isset($x) || !isset($y)){
+			return false;
+		}
+
 		if($x >= $this->row  ||  $y >= $this->col || 0 > $x  ||  0 > $y){
 			return false;
 		}else{
@@ -79,10 +90,6 @@ class Gobang{
 	 * 判断是否胜出
 	 */
 	public function is_win($x,$y){
-		if(!$this->is_valid_position($x,$y)){
-			return false;
-		}
-
 		// 最小可赢坐标
 		$min_x	= $x - 4 >= 0 ? $x - 4 : 0;
 		$min_y	= $y - 4 >= 0 ? $y - 4 : 0;
@@ -160,11 +167,32 @@ class Gobang{
 		return 0;
 	}
 
+
+	/*
+	 * 将棋盘转换成字符串
+	 */
+	public function to_string(){
+		$tmpStr	= '';
+		for($i = 0; $i < $this->row; $i ++){
+			for($j = 0; $j < $this->col; $j ++){
+				$tmpStr	.= $this->chessBoard[$i][$j];
+			}
+		}
+
+		return $tmpStr;
+	}
+
+	/*
+	 * 获取棋盘对象
+	 */
 	public function get_chessboard(){
 		return $this->chessBoard;
 	}
 
-	public function get_chess(){
+	/*
+	 * 输出棋盘到终端
+	 */
+	public function echo_chess(){
 		// 棋盘横坐标
 		echo '  ';
 		for($i = 0; $i < $this->row; $i ++){
@@ -187,6 +215,11 @@ class Gobang{
 		}
 	}
 
+	public function get_err($err){
+		return self::err[$err];
+	}
+
+	// 转换成两个数字
 	protected function two_num($n){
 		if(10 > $n){
 			return ' '.$n;

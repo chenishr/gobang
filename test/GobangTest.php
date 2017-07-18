@@ -32,10 +32,33 @@ class GobangTest extends TestCase{
 
 		$gb	= new Gobang($initData);
 
-		$gb->get_chess();
+		//echo "\n";
+		//$gb->echo_chess();
 		$chessBoard	= $gb->get_chessboard();
 
 		$this->assertEquals(15, count($chessBoard));
+	}
+
+	public function testStep(){
+		$gb	= new Gobang();
+
+		$turn	= 1;
+		$x		= 7;
+		$y		= 7;
+		$gb->one_step($turn,$x,$y);
+		//echo "\n";
+		//$gb->echo_chess();
+		$chessBoard	= $gb->get_chessboard();
+		$this->assertEquals($turn,$chessBoard[$x][$y]);
+
+		$turn	= 2;
+		$x		= 8;
+		$y		= 8;
+		$gb->one_step($turn,$x,$y);
+		//echo "\n";
+		//$gb->echo_chess();
+		$chessBoard	= $gb->get_chessboard();
+		$this->assertEquals($turn,$chessBoard[$x][$y]);
 	}
 
 	public function testIsWin(){
@@ -43,20 +66,67 @@ class GobangTest extends TestCase{
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,1,1,1,1,0,0,0,0,0,0,0],
+			[0,0,0,0,1,1,1,1,0,0,0,0,0,0,0],
+			[0,0,0,0,1,1,1,1,0,0,0,0,0,0,0],
+			[0,0,0,0,1,1,1,1,0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,2,0,2,0,0,0,0],
-			[0,0,0,0,0,0,1,1,1,2,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,2,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,1,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
+			[0,0,0,0,0,0,0,0,2,2,2,2,0,0,0],
+			[0,0,0,0,0,0,0,0,2,2,2,2,0,0,0],
+			[0,0,0,0,0,0,0,0,2,2,2,2,0,0,0],
+			[0,0,0,0,0,0,0,0,2,2,2,2,0,0,0],
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
 			[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
 		];
 
+
+		// 水平成五子
 		$gb	= new Gobang($initData);
+		$turn	= 1;
+		$x		= 4;
+		$y		= 3;
+		$gb->one_step($turn,$x,$y);
+		//echo "\n";
+		//$gb->echo_chess();
+		$win	= $gb->is_win($x,$y);
+		$this->assertEquals($turn,$win);
+		unset($gb);
+
+		// 垂直成五子
+		$gb	= new Gobang($initData);
+		$turn	= 2;
+		$x		= 8;
+		$y		= 9;
+		$gb->one_step($turn,$x,$y);
+		//echo "\n";
+		//$gb->echo_chess();
+		$win	= $gb->is_win($x,$y);
+		$this->assertEquals($turn,$win);
+		unset($gb);
+
+		// 斜线成五子
+		$gb	= new Gobang($initData);
+		$turn	= 1;
+		$x		= 2;
+		$y		= 3;
+		$gb->one_step($turn,$x,$y);
+		//echo "\n";
+		//$gb->echo_chess();
+		$win	= $gb->is_win($x,$y);
+		$this->assertEquals($turn,$win);
+		unset($gb);
+
+		// 垂直成五子
+		$gb	= new Gobang($initData);
+		$turn	= 2;
+		$x		= 8;
+		$y		= 12;
+		$gb->one_step($turn,$x,$y);
+		//echo "\n";
+		//$gb->echo_chess();
+		$win	= $gb->is_win($x,$y);
+		$this->assertEquals($turn,$win);
+		unset($gb);
 	}
 }
