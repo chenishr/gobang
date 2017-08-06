@@ -5,10 +5,10 @@
  * Mail: 			chenishr@gmail.com 
  * Created Time:	Fri Jul 14 13:45:07 2017
  ************************************************************************/
-use chenishr\Gobang;
+use Chenishr\Gobang;
 use PHPUnit\Framework\TestCase;
 
-require "../Gobang.class.php";
+require dirname(__FILE__)."/../src/Gobang.class.php";
 
 class GobangTest extends TestCase{
 	public function testInit(){

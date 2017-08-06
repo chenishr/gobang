@@ -1,0 +1,18 @@
+{
+    "name": "Chenishr/gobang",
+    "description": "一个五子棋类",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "chenishr",
+            "email": "chenishr@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+	"autoload": {
+		"psr-4": {
+			"Chenishr\\": "src/"
+		}
+	}
+}

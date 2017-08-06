@@ -5,7 +5,7 @@
  * Mail: 			chenishr@gmail.com 
  * Created Time:	Fri Jul 14 12:57:58 2017
  ************************************************************************/
-namespace chenishr;
+namespace Chenishr;
 
 class Gobang{
 	const err	= [

@@ -5,9 +5,10 @@
  * Mail: 			chenishr@gmail.com 
  * Created Time:	Mon Jul 17 13:44:37 2017
  ************************************************************************/
-use chenishr\Gobang;
+use Chenishr\Gobang;
 
-require "../Gobang.class.php";
+//require dirname(__FILE__)."/../src/Gobang.class.php";
+require dirname(__FILE__)."/../vendor/autoload.php";
 
 $initData	= [
 	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
