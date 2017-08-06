@@ -7,8 +7,8 @@
  ************************************************************************/
 use Chenishr\Gobang;
 
-//require dirname(__FILE__)."/../src/Gobang.class.php";
-require dirname(__FILE__)."/../vendor/autoload.php";
+require dirname(__FILE__)."/../src/Gobang.class.php";
+//require dirname(__FILE__)."/../vendor/autoload.php";
 
 $initData	= [
 	[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
